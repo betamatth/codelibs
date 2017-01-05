@@ -49,23 +49,23 @@ class PagSeguro {
 	}
 
 	public function transactionsAbandoned(array $params = array()){
-		return $this->_pagSeguro->listTransactions($params, true);
+		return json_decode(json_encode( $this->_pagSeguro->listTransactions($params, true) ));
 	}
 
 	public function listTransactions(array $params = array()){
-		return $this->_pagSeguro->listTransactions($params);
+		return json_decode(json_encode( $this->_pagSeguro->listTransactions($params) ));
 	}
 
 	public function transactionByCode($code){
-		return $this->_pagSeguro->transactionByCode($code);
+		return json_decode(json_encode( $this->_pagSeguro->transactionByCode($code) ));
 	}
 
 	public function transactionByReference($ref){
-		return $this->_pagSeguro->transactionByReference($ref);
+		return json_decode(json_encode( $this->_pagSeguro->transactionByReference($ref) ));
 	}
 
 	public function cancelTransaction($code){
-		return $this->_pagSeguro->cancelTransaction($code);
+		return json_decode(json_encode( $this->_pagSeguro->cancelTransaction($code) ));
 	}
 
 }

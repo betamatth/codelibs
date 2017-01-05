@@ -88,7 +88,7 @@
              *    13.0 = code
              *    13.1 = type
              */
-            $transaction = (object)$transactions[$i];
+            $transaction = $transactions[$i];
 
             $transactionDate = new DateTime( $transaction->date );
             $transactionDate = $transactionDate->format('d/m/Y H:i');
@@ -109,14 +109,29 @@
               case 1:
                 $transactionStatus = 'Aguardando Pagamento';
                 break;
+              case 2:
+                $transactionStatus = 'Em Análise';
+                break;
               case 3:
                 $transactionStatus = 'Paga';
+                break;
+              case 4:
+                $transactionStatus = 'Disponível';
+                break;
+              case 5:
+                $transactionStatus = 'Em Disputa';
                 break;
               case 6:
                 $transactionStatus = 'Devolvida';
                 break;
               case 7:
                 $transactionStatus = 'Cancelada';
+                break;
+              case 8:
+                $transactionStatus = 'Debitado';
+                break;
+              case 9:
+                $transactionStatus = 'Retenção Temporária';
                 break;
               default:
                 $transactionStatus = 'Unknow';
@@ -139,7 +154,7 @@
             }
           ?>
           <tr>
-            <td><?php echo $transaction->code; ?></td>
+            <td><a href="<?php echo base_url('checkout/transaction?code='.$transaction->code); ?>"><?php echo $transaction->code; ?></a></td>
             <td><?php echo $transactionDate; ?></td>
             <td><?php echo $transactionType; ?></td>
             <td><?php echo number_format($transaction->grossAmount, 2, ',', '.'); ?></td>

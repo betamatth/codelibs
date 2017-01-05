@@ -139,7 +139,7 @@
             }
           ?>
           <tr>
-            <td><?php echo $transaction->code; ?></td>
+            <td><a href="<?php echo base_url('checkout/transaction?code='.$transaction->code); ?>"><?php echo $transaction->code; ?></a></td>
             <td><?php echo $transactionDate; ?></td>
             <td><?php echo $transactionType; ?></td>
             <td><?php echo number_format($transaction->grossAmount, 2, ',', '.'); ?></td>

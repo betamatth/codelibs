@@ -45,9 +45,9 @@ class Checkout extends CI_Controller {
 			'maxPageResults' => 5
 			));
 
-		$data['resultsInThisPage'] = $list['transactionSearchResult']['resultsInThisPage'];
-		$data['transactions'] = $list['transactionSearchResult']['transactions']['transaction'];
-		$data['totalPages'] = $list['transactionSearchResult']['totalPages'];
+		$data['transactions'] = $list->transactionSearchResult->transactions->transaction;
+		$data['resultsInThisPage'] = $list->transactionSearchResult->resultsInThisPage;
+		$data['totalPages'] = $list->transactionSearchResult->totalPages;
 
 		$this->load->view('checkout/transactionsAbandoned', $data);
 	}
@@ -65,21 +65,22 @@ class Checkout extends CI_Controller {
 			'maxPageResults' => 5
 			));
 
-		$data['transactions'] = $list['transactionSearchResult']['transactions']['transaction'];
-		$data['resultsInThisPage'] = $list['transactionSearchResult']['resultsInThisPage'];
-		$data['totalPages'] = $list['transactionSearchResult']['totalPages'];
+		$data['transactions'] = $list->transactionSearchResult->transactions->transaction;
+		$data['resultsInThisPage'] = $list->transactionSearchResult->resultsInThisPage;
+		$data['totalPages'] = $list->transactionSearchResult->totalPages;
 
 		$this->load->view('checkout/transactions', $data);
 	}
 
 	public function transaction(){
-		header('Content-type: text/html; charset=utf-8;');
 		if( isset($_GET['reference']) ){
-			var_dump($this->pagseguro->transactionByReference($_GET['reference']));
+			$transaction = $this->pagseguro->transactionByReference($_GET['reference']);
 		}
 		if( isset($_GET['code']) ){
-			var_dump($this->pagseguro->transactionByCode($_GET['code']));
+			$transaction = $this->pagseguro->transactionByCode($_GET['code']);
 		}
+		$data['transaction'] = $transaction->transaction;
+		$this->load->view('checkout/transaction', $data);
 	}
 
 	public function cancelTransaction(){
