@@ -76,3 +76,14 @@ if( !function_exists('psToInt') ){
 		return preg_replace('/\D/', '', $value);
 	}
 }
+
+if( !function_exists('arrayToObj') ){
+	function arrayToObj( $arr ){
+		foreach($arr as $key => $val){
+			if( is_array($val) ){
+				$arr[$key] = arrayToObj($val);
+			}
+		}
+		return (object)$arr;
+	}
+}

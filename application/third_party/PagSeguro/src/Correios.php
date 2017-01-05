@@ -8,7 +8,7 @@ use PagSeguro\XmlParser;
 class Correios {
 	
 	// URL do WebService dos Correios
-	private $_URL = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx';
+	private $_URL = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo';
 
 	private $_params = array(
 		// Código e senha da empresa, se você tiver contrato com os correios, se não tiver deixe vazio.
@@ -119,11 +119,10 @@ class Correios {
 			$this->setError('Algo de errado com as dimensões deste produto!');
 		}
 
-		$params = http_build_query($this->_params);
 		// Creating a http connection (CURL abstraction)
 		$httpConnection = new Http();
 		// Request to PagSeguro Session API using Credentials
-		$httpConnection->post($this->_URL, $params);
+		$httpConnection->post($this->_URL, $this->_params);
 		// Request OK getting the result
 		if ($httpConnection->getStatus() === 200) {
 			return $this->parseXml($httpConnection->getResponse());

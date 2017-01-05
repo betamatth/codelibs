@@ -75,8 +75,7 @@ class Checkout extends CI_Controller {
 	public function transaction(){
 		if( isset($_GET['reference']) ){
 			$transaction = $this->pagseguro->transactionByReference($_GET['reference']);
-		}
-		if( isset($_GET['code']) ){
+		}else if( isset($_GET['code']) ){
 			$transaction = $this->pagseguro->transactionByCode($_GET['code']);
 		}
 		$data['transaction'] = $transaction->transaction;
@@ -87,6 +86,25 @@ class Checkout extends CI_Controller {
 		if( isset($_GET['code']) ){
 			var_dump($this->pagseguro->cancelTransaction($_GET['code']));
 		}
+	}
+
+	public function frete(){
+		$this->load->library('frete');
+
+		$dados = $this->frete->setCepOrigem('58.079-000')->setCepDestino('89182-000')->setFormato(1)->setDimensoes(0.3, 30, 20, 10, 6000)->setValorDeclarado(0)->consultar();
+		$dados = sprintf("%s", $dados['cResultado']);
+		
+		$dados = explode(' ', $dados);
+
+		$frete = array();
+
+		foreach($dados as $val){
+			if( !empty($val) || $val != ' ' ){
+				$frete[] = $val;
+			}
+		}
+
+		var_dump($frete);
 	}
 
 }

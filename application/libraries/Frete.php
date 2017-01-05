@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('DS', DIRECTORY_SEPARATOR);
+if( !defined('DS') ) define('DS', DIRECTORY_SEPARATOR);
 require(APPPATH . 'third_party' . DS . 'PagSeguro' . DS . 'autoload.php');
 
 use PagSeguro\Correios;
@@ -33,8 +33,8 @@ class Frete {
 		return $this;
 	}
 
-	public function setDimensoes($peso, $comp, $larg, $alt, $diam = 0){
-		$this->_correios->setDimensoes($peso, $comp, $larg, $alt, $diam);
+	public function setDimensoes($peso, $comp, $larg, $alt){
+		$this->_correios->setDimensoes($peso, $comp, $larg, $alt, ($comp * $larg * $alt));
 		return $this;
 	}
 
