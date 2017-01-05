@@ -1,7 +1,7 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
 
 /*
- * OpenBoleto - Geração de boletos bancários em PHP
+ * OpenBoleto - Geração de boletos bancários em PHP *
  *
  * LICENSE: The MIT License (MIT)
  *
@@ -25,12 +25,15 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-spl_autoload_register(function($className) {
-    $filename = str_replace(array('\\', '_', 'OpenBoleto'), array(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, NULL), $className) . '.php';
-    $path = __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $filename;
-    if (is_file($path)) {
-        include $path;
-        return true;
-    }
-    return false;
-});
+namespace OpenBoleto;
+
+/**
+ * Classe exception
+ *
+ * @package    OpenBoleto
+ * @author     Daniel Garajau <http://github.com/kriansa>
+ * @copyright  Copyright (c) 2013 Estrada Virtual (http://www.estradavirtual.com.br)
+ * @license    MIT License
+ * @version    1.0
+ */
+class Exception extends \Exception {}

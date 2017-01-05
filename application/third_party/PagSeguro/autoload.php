@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
- * OpenBoleto - Geração de boletos bancários em PHP
+ * PagSeguro
  *
  * LICENSE: The MIT License (MIT)
  *
- * Copyright (C) 2013 Estrada Virtual
+ * Copyright (C) 2016 Mateus Tavares
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this
  * software and associated documentation files (the "Software"), to deal in the Software
@@ -26,7 +26,7 @@
  */
 
 spl_autoload_register(function($className) {
-    $filename = str_replace(array('\\', '_', 'OpenBoleto'), array(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, NULL), $className) . '.php';
+    $filename = str_replace(array('\\', '_', 'PagSeguro'), array(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, NULL), $className) . '.php';
     $path = __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $filename;
     if (is_file($path)) {
         include $path;
