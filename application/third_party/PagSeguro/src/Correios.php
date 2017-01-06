@@ -3,7 +3,6 @@
 namespace PagSeguro;
 
 use PagSeguro\Http;
-use PagSeguro\XmlParser;
 
 class Correios {
 	
@@ -54,17 +53,6 @@ class Correios {
 	private function setError( $msg ){
 		echo "<b>".get_class($this).":</b> {$msg}";
 		die();
-	}
-
-	private function parseXml($data) {
-		// Creating an xml parser 
-		$xmlParser = new XmlParser($data);
-		// Verifying if is an XML
-		if ($xml = $xmlParser->getResult()) {
-			return $xml;
-		} else {
-			throw new \Exception("[$data] is not an XML");
-		}
 	}
 
 	public function setCredenciais( $code, $senha ){
@@ -125,7 +113,7 @@ class Correios {
 		$httpConnection->post($this->_URL, $this->_params);
 		// Request OK getting the result
 		if ($httpConnection->getStatus() === 200) {
-			return $this->parseXml($httpConnection->getResponse());
+			return simplexml_load_string($httpConnection->getResponse());
 		} else {
 			throw new \Exception("API Request Error: ".$httpConnection->getStatus());
 		}
