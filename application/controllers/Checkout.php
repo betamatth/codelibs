@@ -7,7 +7,7 @@ class Checkout extends CI_Controller {
 		parent::__construct();
 
 		$this->load->library(array('PagSeguro'=>'pagseguro'));
-		$this->pagseguro->setCredentials('mateus460@gmail.com', 'F941B21FEF7E419C9CA8379025090314');
+		$this->pagseguro->setCredentials('YOUR_PAGSEGURO_EMAIL', 'YOUR_PAGSEGURO_TOKEN');
 	}
 
 	public function index(){
